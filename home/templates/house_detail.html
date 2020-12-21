@@ -1,0 +1,120 @@
+{% extends "homebase.html" %}
+{% block title %} {{ house.title }} {% endblock %}
+{% block keywords %} {{ house.keywords }} {% endblock %}
+{% block description %} {{ house.description }} {% endblock %}
+{% block head %}
+    {% load static %}
+    <link rel="shortcut icon" type="text/x-icon" href="{{ setting.icon.url }}" >
+    <link rel="stylesheet" href="{% static 'gallery/css/core-style.css' %}">
+    <link rel="stylesheet" href="{% static 'gallery/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <!-- full Title -->
+    <div class="full-title">
+        <div class="container">
+            <!-- Page Heading/Breadcrumbs -->
+            <h1 class="mt-4 mb-3"> Ev Detay </h1>
+            <div class="breadcrumb-main">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active">Ev Detay</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="blog-main">
+        <div class="container">
+            <div class="row">
+                <!-- Post Content Column -->
+                <div class="col-lg-8">
+                    <!-- Preview Image -->
+                    <div class="single_product_thumb">
+                        <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url({{house.image.url}});">
+                                </li>
+                                {% for rs in images %}
+                                    <li data-target="#product_details_slider" data-slide-to="{{ rs.id }}" style="background-image: url({{rs.image.url}});">
+                                    </li>
+                                {% endfor %}
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <a class="gallery_img" href="#product_details_slider">
+                                        <img class="d-block w-100" src="{{ house.image.url }}"  alt="slide">
+                                    </a>
+                                </div>
+                                {% for rs in images %}
+                                    <div class="carousel-item">
+                                        <a class="gallery_img" href="#product_details_slider">
+                                            <img class="d-block w-100" src="{{ rs.image.url }}"  alt="slide">
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="blog-right-side">
+                        <!-- Comments Form -->
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <div class="card my-4">
+                            <h5 class="card-header">Yorumunuz:</h5>
+                            <div class="card-body">
+                                <form action="/house/addcomment/{{ house.id }}" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" name="subject" id="id_subject" placeholder="Konu" />
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="comment" id="id_comment" rows="3" placeholder="Yorum"></textarea>
+                                    </div>
+                                    {% if user.id is not None %}
+                                        <button type="submit" class="btn btn-primary">Gönder</button>
+                                    {% else %}
+                                        Yorum eklemek için giriş yapınız!
+                                    {% endif %}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% for rs in comments %}
+                    <!-- Single Comment -->
+                    <div class="media mb-4">
+                        <div class="media-body">
+                            <div><h5 class="mt-0">{{ rs.user.username }}</h5></div>
+                            <div><h5 class="mt-0">{{ rs.create_at }}</h5></div>
+                            <div><h3 class="mt-0">{{ rs.subject }}</h3></div>
+                            {{ rs.comment }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Sidebar Widgets Column -->
+                <div class="col-md-4 blog-right-side">
+                    <h3 class="my-3">Ev Bilgileri </h3>
+                    <ul>
+                        <li><span>Kategori :</span><span>{{ house.category }}</span></li>
+                        <li><span>Oda :</span><span>{{ house.room }}</span></li>
+                        <li><span>Alan :</span><span>{{ house.area }}</span></li>
+                        <li><span>Kira :</span><span>{{ house.rent }}</span></li>
+                        <li><span>Bulunduğu kat :</span><span>{{ house.floorLocation }}</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

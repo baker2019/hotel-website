@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title %} Anasayfa - Zonebiz - Business Consulting Bootstrap4 Responsive Template {% endblock %} </title>
+    <meta name="keywords" content="{% block keywords %} Anasayfa Anahtar Kelimeler {% endblock %} ">
+    <meta name="description" content="{% block description %} Anasayfa Kısa Açıklama {% endblock %} ">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Fontawesome CSS -->
+    <link href="{% static 'css/all.css' %}" rel="stylesheet">
+    <!-- Owl Carousel CSS -->
+    <link href="{% static 'css/owl.carousel.min.css' %}" rel="stylesheet">
+    <!-- Owl Carousel CSS -->
+    <link href="{% static 'css/jquery.fancybox.min.css' %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700">
+    <link rel="stylesheet" href="{% static 'header/fonts/icomoon/style.css' %}">
+    <link rel="stylesheet" href="{% static 'header/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'header/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'header/css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'header/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'header/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'header/css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'header/css/style.css' %}">
+
+    <!-- jQuery !-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"> </script>
+    <!-- jQuery UI !-->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+    {% block head %}{% endblock %}
+</head>
+<body>
+<div class="wrapper-main">
+    {% block navigation %}{% endblock %}
+    {% block header %}{% endblock %}
+    {% block content %}{% endblock %}
+    {% include 'footer.html' %}
+    {% block foot %}{% endblock %}
+</div>
+{% include 'javascript.html' %}
+</body>
+</html>

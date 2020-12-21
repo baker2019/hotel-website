@@ -1,0 +1,31 @@
+{% extends "homebase.html" %}
+
+{% block title %} {{ setting.title }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block head %}
+    <link rel="shortcut icon" type="text/x-icon" href="{{ setting.icon.url }}" >
+{% endblock %}
+{% block content %}
+
+	<!-- full Title -->
+	<div class="full-title">
+		<div class="container">
+			<!-- Page Heading/Breadcrumbs -->
+			<h1 class="mt-4 mb-3"> References </h1>
+			<div class="breadcrumb-main">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="/">Home</a>
+					</li>
+					<li class="breadcrumb-item active"> References </li>
+				</ol>
+			</div>
+		</div>
+	</div>
+	<div class="about-inner">
+        <div class="container">
+            {{ setting.references | safe }}
+        </div>
+    </div>
+{% endblock %}

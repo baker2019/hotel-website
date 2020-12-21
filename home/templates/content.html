@@ -1,0 +1,50 @@
+{% load static %}
+    <!-- Page Content -->
+	<div class="services-bar">
+		<div class="container">
+			<h1 class="py-4">Kiralık Evler </h1>
+			<div class="row">
+                  {% for rs in random_houses %}
+                       <div class="col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-img">
+                                    <a href="/house/{{ rs.id }}/{{ rs.slug }}"><img class="img-fluid" src="{{ rs.image.url }}" alt="" /></a>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-header"> {{ rs.title }} </h4>
+                                    <p class="card-text">{{rs.description}}</p>
+                                </div>
+                            </div>
+                       </div>
+                  {% endfor %}
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+        <div class="portfolio-main">
+            <h2>Son Eklenen Kiralık Evler</h2>
+                <div id="projects" class="projects-main row">
+                   {% for rs in random_houses %}
+                       <div class="col-lg-4 col-sm-6 pro-item portfolio-item financial academic">
+                          <div class="card h-100">
+                             <div class="card-img">
+                                <a href="{{ rs.image.url }}" data-fancybox="images">
+                                   <img class="card-img-top" src="{{ rs.image.url }}" alt="" />
+                                   <div class="overlay"><i class="fas fa-arrows-alt"></i></div>
+                                </a>
+                             </div>
+                             <div class="card-body">
+                                <h4 class="card-title">
+                                   <a href="/house/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a>
+                                </h4>
+                             </div>
+                          </div>
+                       </div>
+                   {% endfor %}
+                </div>
+        </div>
+    </div>
+
+
+

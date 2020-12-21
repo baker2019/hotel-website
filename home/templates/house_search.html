@@ -1,0 +1,47 @@
+{% extends "homebase.html" %}
+
+{% block title %} House Search Result {% endblock %}
+{% block keywords %} {{ category.keywords }} {% endblock %}
+{% block description %} {{ category.description }} {% endblock %}
+{% block head %}
+    <link rel="shortcut icon" type="text/x-icon" href="{{ setting.icon.url }}" >
+{% endblock %}
+{% block content %}
+
+    <!-- full Title -->
+    <div class="full-title">
+        <div class="container">
+            <!-- Page Heading/Breadcrumbs -->
+            <div class="breadcrumb-main">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active"> {{ category.title }} </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-col">
+        <div class="container">
+            <div class="row">
+                <table cellpadding="3" width="1200">
+                    <tr>
+                        <th>Image</th>
+                        <th>House Name</th>
+                        <th>Category</th>
+                        <th>Rent</th>
+                    </tr>
+                    {% for rs in houses %}
+                        <tr>
+                            <td><a href="/house/{{ rs.id }}/{{ rs.slug }}"><img src="{{ rs.image.url }}" style="width:255px;height:258.953px" alt=""/></a></td>
+                            <td><h4 class="house-name"><a href="/house/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a></h4></td>
+                            <td><a href="/category/{{ rs.category.id }}/{{ rs.category.slug }}">{{ rs.category }}</a></td>
+                            <td><h4>{{ rs.rent }}</h4></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

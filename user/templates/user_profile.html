@@ -1,0 +1,78 @@
+{% extends "homebase.html" %}
+
+{% block title %} User Profile {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block head %}
+    <link rel="shortcut icon" type="text/x-icon" href="{{ setting.icon.url }}" >
+{% endblock %}
+{% block content %}
+
+    <!-- full Title -->
+    <div class="full-title">
+        <div class="container">
+            <!-- Page Heading/Breadcrumbs -->
+            <h1 class="mt-4 mb-3">  User Profile </h1>
+            <div class="breadcrumb-main">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active">  User Profile  </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div>
+            <div class="row">
+                {% include 'user_panel.html' %}
+                <div class="col-lg-9 mb-4">
+                    <div class="card h-80">
+                        <div class="card-header">
+                            <div>USER INFORMATION</div>
+                        </div>
+                        <ul class="list-group" style="padding: 25px 25px">
+                            <table style="width:100%">
+                                <tr style="border-bottom:1px solid #d9d9d9">
+                                    <th>
+                                        <a href="/user/update" class="btn btn-sm btn-primary">Update Profile</a>
+                                        <a href="/user/password" class="btn btn-sm btn-primary">Change Password</a>
+                                    </th>
+                                    <td><img src="{{ profile.image.url }}" alt="" style="height: 120px;border-radius: 60px"></td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #d9d9d9">
+                                    <th>Name Surname</th>
+                                    <td>{{ profile.user_name }}</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #d9d9d9">
+                                    <th>Email</th>
+                                    <td>{{ profile.user.email }}</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #d9d9d9">
+                                    <th>Phone</th>
+                                    <td>{{profile.phone}}</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #d9d9d9">
+                                    <th>Address</th>
+                                    <td>{{profile.address}}</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #d9d9d9">
+                                    <th>City</th>
+                                    <td>{{profile.city}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Country</th>
+                                    <td>{{profile.country}}</td>
+                                </tr>
+                            </table>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "homebase.html" %}
+
+{% block title %} {{ setting.title }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block head %}
+    <link rel="shortcut icon" type="text/x-icon" href="{{ setting.icon.url }}" >
+    <script>
+        $( function() {
+            $( "#accordion" ).accordion();
+        } );
+    </script>
+{% endblock %}
+{% block content %}
+
+    <!-- full Title -->
+    <div class="full-title">
+        <div class="container">
+            <!-- Page Heading/Breadcrumbs -->
+            <h1 class="mt-4 mb-3"> Sıkça Sorulan Sorular </h1>
+            <div class="breadcrumb-main">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active"> SSS </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+      <!-- Page Content -->
+	<div class="faq-main">
+		<div class="container">
+			<div class="accordion" id="accordionExample">
+				{% for rs in faq %}
+                <div class="card accordion-single">
+					<div class="card-header" id="{{ rs.id }}">
+						<h5 class="mb-0">
+							<button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+								data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+								{{rs.question}}
+							</button>
+						</h5>
+					</div>
+					<div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+						<div class="card-body">
+							{{ rs.answer }}
+						</div>
+					</div>
+				</div>
+                {% endfor %}
+			</div>
+		</div>
+    </div>
+    <!-- /.container -->
+{% endblock %}

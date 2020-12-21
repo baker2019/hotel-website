@@ -1,0 +1,72 @@
+{% extends "homebase.html" %}
+
+{% block title %} Comments {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block head %}
+    <link rel="shortcut icon" type="text/x-icon" href="{{ setting.icon.url }}" >
+{% endblock %}
+{% block content %}
+
+    <!-- full Title -->
+    <div class="full-title">
+        <div class="container">
+            <h1 class="mt-4 mb-3"></h1>
+            <div class="breadcrumb-main">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active"></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div>
+            <div class="row">
+                {% include 'user_panel.html' %}
+                <div class="col-lg-9 mb-4">
+                    <div class="card h-80">
+                        <div class="card-header">
+                            <div>COMMENTS</div>
+                        </div>
+                        <ul class="list-group" style="padding: 25px 25px">
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }}" role="alert">
+                                        {{ message|safe}}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            <table>
+                                <tr>
+                                    <th>House</th>
+                                    <th>Subject</th>
+                                    <th>Comment</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th></th>
+                                </tr>
+                                {% for rs in comments %}
+                                    <tr>
+                                        <td>
+                                            <a href="/house/{{ rs.house_id }}/{{ rs.house.slug }}">{{ rs.house.title }}</a>
+                                        </td>
+                                        <td>{{rs.subject}}</td>
+                                        <td>{{rs.comment}}</td>
+                                        <td>{{rs.status}}</td>
+                                        <td>{{rs.create_at}}</td>
+                                        <td>
+                                            <a class="btn btn-sm btn-primary" href="/user/delete_comment/{{ rs.id }}" onclick="return confirm('Will be delete ! Are you sure?')">Delete</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

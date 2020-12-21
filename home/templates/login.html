@@ -1,0 +1,61 @@
+{% extends "homebase.html" %}
+
+{% block title %} Login {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block head %}
+    <link rel="shortcut icon" type="text/x-icon" href="{{ setting.icon.url }}" >
+{% endblock %}
+{% block content %}
+
+    <!-- full Title -->
+    <div class="full-title">
+        <div class="container">
+            <!-- Page Heading/Breadcrumbs -->
+            <h1 class="mt-4 mb-3"> Login </h1>
+            <div class="breadcrumb-main">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active">Login</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="contact-main">
+        <div class="container">
+            <!-- Content Row -->
+            <div class="row">
+                <!-- Map Column -->
+                <div class="col-lg-4 contact-left">
+                    <h3>Login Formu</h3>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                <input type="text" placeholder="Username" class="form-control" id="username" name="username" required data-validation-required-message="Please enter your username.">
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                <input type="password" placeholder="Password" class="form-control" id="password" name="password" required data-validation-required-message="Please enter your password">
+                            </div>
+                        </div>
+                        <input type="submit" value="Login">
+                    </form>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </div>
+{% endblock %}

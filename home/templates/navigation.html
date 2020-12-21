@@ -1,0 +1,63 @@
+<header class="site-navbar" role="banner">
+    <div class="site-navbar-top">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
+                    <form action="/search/" method="post" class="site-block-top-search">
+                        {% csrf_token %}
+                        <span class="icon icon-search2"></span>
+                        <input type="text" name="query" id="query" class="form-control border-0" placeholder="Enter Your Keyword"/>
+                    </form>
+                </div>
+                <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
+                    <div class="site-logo">
+                        <a href="/" class="js-logo-clone">EV KİRALAMA SİTESİ</a>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 order-3 order-md-3 text-right">
+                    <div class="site-top-icons">
+                        <ul class="site-menu js-clone-nav d-none d-md-block">
+                            {% if user.id is not None %}
+                                <li><span class="icon icon-person"> </span><a href="/user">{{ user.first_name }} {{ user.last_name }}</a><span><a href="/logout/">Logout</a></span></li>
+                            {% else %}
+                                <li><span class="icon icon-lock"></span> <a href="/login/"> Login</a></li>
+                                <li><span class="icon icon icon-account_circle"></span><a href="/signup/">Sign up</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="site-navigation text-right text-md-center" role="navigation">
+        <div class="container">
+            <ul class="site-menu js-clone-nav d-none d-md-block">
+                <li><a href="/">ANASAYFA</a></li>
+                <li class="has-children ">
+                    <a href="index.html">KATEGORİ</a>
+                    {% load mptt_tags %}
+                    <ul class="dropdown">
+                        {% recursetree category %}
+                            <li class="has-children">
+                                <a href="/category/{{ node.id }}/{{ node.slug }}">{{ node.title }}</a>
+                                {% if not node.is_leaf_node %}
+                                    <ul class="dropdown">
+                                        {{ children }}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        {% endrecursetree %}
+                    </ul>
+                </li>
+                <li><a href="/hakkimizda">HAKKIMIZDA</a></li>
+                <li><a href="/referanslar">REFERANSLAR</a></li>
+                <li><a href="/iletisim">İLETİŞİM</a></li>
+                <li><a href="/sss">SSS</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+
+
+
